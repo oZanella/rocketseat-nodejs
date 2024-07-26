@@ -1,39 +1,28 @@
 import { unsubscribe } from 'node:diagnostics_channel'
 import http from 'node:http'
 
-// Criar um user (name, email, password) - tudo isso com o req
-// Res é usado para colocar uma resposta de quem está chamando os comandos
+//O que é um conceito Stateful? 
+  // - Sempre vai ter algum dado salvo em memória ou seja caso não tenha nada na memória (depende da memória) vai trabalhar de forma diferente
+// O que é um conceito Stateless?
+  // - Não salva nada em memória, sempre salva em bancos de dados, arquivos de textos ou exitCode, assim encerrando ela não vai ocorrer problemas justamente por conta disso.
 
-//Rotas de criação e listagem (HTTP)//
-// - Criar user
-// - Listagem de user
-// - Edição de user
-// - Remoção de user
-
-// -HTTP
-//   - Método HTTP
-//   - URL
-
-// GET, POST, PUT, PATCH, DELETE (comandos mais comuns dentro de API no dia a dia)
-
-// GET ==> Buscar um recurso do back-end
-// POST ==> Criar um recurso no back-end
-// PUT ==> Atualizar um recurso no back-end (usado para alterar vários dados ao mesmo tempo)
-// PATH ==> Atualizar uma informação unica ou especifica no back-end (usado para editar algo em especifico)
-// DELETE ==> Deletar um recurso do back-end
-
-
-// GET users ==> Buscando user do back-end
-// POST users ==> Criando um user no back-end
+const users = []
 
 const server = http.createServer((req, res) => {
   const { method, url } = req
 
   if (method === 'GET' && url === '/users') {
-    return res.end('Listagem de usuários')
+    return res.end(users)
   }
 
   if (method === 'POST' && url === '/users') {
+    users.push({
+      id: 1,
+      name: 'Henrique Zanella',
+      email: 'henriquezanella19@gmail.com',
+    })
+
+
     return res.end('Criação de usuários')
   }
 
