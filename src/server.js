@@ -11,6 +11,9 @@ import http from 'node:http'
   // Cabeçalhos (Requisições/respostas) ==> Metadados (Como aquele dado pode ser interpretado pelo front-end)
 
   //Quando usamos o res são dados enviados do back-end para o front-end
+
+  //HTTP Status Code - importancia semantica entre front e back-end para explicar o que é cada erro dentro de uma aplicação
+
 const users = []
 
 const server = http.createServer((req, res) => {
@@ -31,10 +34,10 @@ const server = http.createServer((req, res) => {
     })
 
 
-    return res.end('Criação de usuários')
+    return res.writeHead(201).end()
   }
 
-  return res.end('Hello Desenvolvedor')
+  return res.writeHead(404).end()
 })
 
 server.listen(3333)
