@@ -6,13 +6,21 @@ import http from 'node:http'
 // O que é um conceito Stateless?
   // - Não salva nada em memória, sempre salva em bancos de dados, arquivos de textos ou exitCode, assim encerrando ela não vai ocorrer problemas justamente por conta disso.
 
+  // JSON - JavaScript Object Notacion, extremamente utilziado para fazer a comunicação entre front-end e back-end usando apenas aplicações e strings
+
+  // Cabeçalhos (Requisições/respostas) ==> Metadados (Como aquele dado pode ser interpretado pelo front-end)
+
+  //Quando usamos o res são dados enviados do back-end para o front-end
 const users = []
 
 const server = http.createServer((req, res) => {
   const { method, url } = req
 
+
   if (method === 'GET' && url === '/users') {
-    return res.end(users)
+    return res      
+    .setHeader('Content-type', 'application/json')
+    .end(JSON.stringify(users))
   }
 
   if (method === 'POST' && url === '/users') {
@@ -26,7 +34,7 @@ const server = http.createServer((req, res) => {
     return res.end('Criação de usuários')
   }
 
-  return res.end('Hello Dev')
+  return res.end('Hello Desenvolvedor')
 })
 
 server.listen(3333)
